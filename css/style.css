@@ -1,0 +1,529 @@
+ /* Root color variables */
+ :root {
+     --primary: #00b4b5;
+     --secondary: #028889;
+     --accent: #aed140;
+     --white: white;
+     --black: black;
+     --hover: #005353;
+ }
+
+ body {
+     margin: 0;
+     font-family: sans-serif;
+     background-color: #002222;
+     color: white;
+ }
+
+ /* universal */
+ p {
+     opacity: .7 !important;
+ }
+
+ a {
+     text-decoration: none;
+ }
+
+ img {
+     object-fit: cover;
+     object-position: center;
+ }
+
+ /* For WebKit browsers (Chrome, Edge, Safari) */
+ ::-webkit-scrollbar {
+     width: 10px;
+ }
+
+ ::-webkit-scrollbar-track {
+     background: #f0f0f0;
+ }
+
+ ::-webkit-scrollbar-thumb {
+     background-color: var(--primary);
+     border-radius: 6px;
+     border: 2px solid #f0f0f0;
+ }
+
+ ::-webkit-scrollbar-thumb:hover {
+     background-color: var(--secondary);
+ }
+
+ /* colors */
+ .txt-primary {
+     color: var(--primary);
+ }
+
+ /* theme btn */
+ .theme-btn {
+     width: max-content;
+     height: max-content;
+     padding: 10px 30px;
+     background-color: var(--primary);
+     cursor: pointer;
+     border-radius: 30px;
+     transition: .5s;
+     position: relative;
+ }
+
+ .theme-btn .btn-txt {
+     border: 0;
+     background-color: transparent;
+     color: var(--white);
+     z-index: 2;
+     position: relative;
+ }
+
+ .theme-btn::after {
+     position: absolute;
+     content: "";
+     top: 0;
+     left: 0;
+     border-radius: 30px 0px 0px 30px;
+     width: 0%;
+     height: 100%;
+     background-color: var(--secondary);
+     z-index: 1;
+     transition: .5s;
+     scale: 0;
+ }
+
+ .theme-btn::before {
+     position: absolute;
+     content: "";
+     top: 0;
+     right: 0;
+     border-radius: 0px 30px 30px 0px;
+     width: 0%;
+     height: 100%;
+     background-color: var(--secondary);
+     z-index: 1;
+     transition: .5s;
+     scale: 0;
+ }
+
+
+ .theme-btn:hover::after,
+ .theme-btn:hover::before {
+     width: 50%;
+     scale: 1;
+ }
+
+
+ /* theme-btn-2 */
+ /* CSS */
+ .theme-btn-2 {
+     background-color: var(--white);
+     color: var(--black);
+     display: flex;
+     justify-content: center;
+     padding: .75rem 1.65rem;
+     position: relative;
+     text-align: center;
+     width: 100%;
+     position: relative;
+     transform: rotate(-2deg);
+     transition: .5s;
+ }
+
+ .theme-btn-2:hover {
+     background-color: var(--primary);
+     color: var(--white);
+     scale: .9;
+ }
+
+ /* header */
+
+ header {
+     position: fixed;
+     top: 0;
+     width: 100%;
+     background-color: rgba(255, 255, 255, 0.808);
+     z-index: 1030;
+     transition: transform 0.4s ease;
+ }
+
+ .header-logo {
+     height: 50px;
+ }
+
+ @media (width < 1200px) {
+     .header-logo {
+         height: 30px;
+     }
+ }
+
+ header.hidden {
+     transform: translateY(-100%);
+ }
+
+ .navbar {
+     padding: 0.5rem 1rem;
+ }
+
+ .navbar .nav-link {
+     color: var(--secondary);
+     font-weight: 500;
+ }
+
+ .navbar .nav-link:hover {
+     color: var(--hover);
+ }
+
+ .dropdown-menu {
+     transition: all 0.2s ease;
+ }
+
+ @media (min-width: 992px) {
+     .dropdown:hover .dropdown-menu {
+         display: block;
+     }
+ }
+
+ /* banner slider */
+ .slider-btn {
+     width: max-content;
+     height: max-content;
+     background-color: var(--primary);
+     top: 50%;
+     transform: translateY(-50%);
+     writing-mode: vertical-rl;
+     text-orientation: upright;
+     padding: 10px 1px;
+ }
+
+ .slider-btn.prev {
+     left: 0;
+     border-radius: 0px 8px 8px 0px;
+ }
+
+ .slider-btn.next {
+     right: 0;
+     border-radius: 8px 0px 0px 8px;
+ }
+
+ .carousel-control-prev-icon,
+ .carousel-control-next-icon {
+     background-size: 50%;
+ }
+
+ #banner-slider .carousel-item img {
+     height: 100vh;
+ }
+
+ /* about us */
+
+ #about-us {
+     background:
+         linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0.452)),
+         url(../images/banner/2.jpg);
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+ }
+
+ .mask-img {
+     background: linear-gradient(to right, var(--secondary), var(--primary), var(--primary));
+     border-radius: 0px 100px 100px 0px;
+     border-right: 5px solid var(--accent);
+     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+ }
+
+ .about-img-box img {
+     box-shadow: rgba(46, 227, 240, 0.4) -5px 5px, rgba(46, 233, 240, 0.3) -10px 10px, rgba(46, 179, 240, 0.2) -15px 15px, rgba(46, 201, 240, 0.1) -20px 20px, rgba(46, 211, 240, 0.05) -25px 25px;
+ }
+
+ #about-us {
+     color: var(--black);
+ }
+
+ /* program section */
+
+ .pro-box>:nth-child(2) {
+     background-color: var(--primary);
+     color: var(--white);
+     padding: 20px;
+     transition: .5s
+ }
+
+ .pro-box img {
+     width: 90%;
+     transform: translateY(10px);
+     transition: .5s;
+     z-index: -1;
+     border-radius: 10px 10px 0px 0px;
+ }
+
+ .pro-box:hover>:nth-child(2) {
+     background-color: var(--hover);
+ }
+
+ .pro-box:hover img {
+     transform: translateY(0px);
+ }
+
+ .pro-box:hover .theme-btn-2 {
+     background-color: var(--primary);
+     color: var(--white);
+     scale: .9;
+ }
+
+ .pro-box:hover .theme-btn-2:hover {
+     background-color: var(--accent);
+ }
+
+ /* why choose us */
+ #wcu {
+     background-color: var(--hover);
+ }
+
+ .wcu-text {
+     color: var(--white);
+ }
+
+ .why-box {
+     background-color: var(--primary);
+     color: var(--white);
+     transition: .5s;
+     border-radius: 10px;
+     transform: rotate(0deg) scale(1);
+     padding: 20px 20px 80px 20px;
+     position: relative;
+     border-radius: 10px 10px 50px 10px;
+ }
+
+ .why-icon {
+     background-color: white;
+     position: absolute;
+     right: 0;
+     bottom: 0;
+     aspect-ratio: 1/1;
+     width: 60px;
+     border-radius: 50%;
+     color: var(--primary);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-size: 25px;
+     box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+     animation: glowPulse 3s ease-in-out infinite;
+
+ }
+
+ @keyframes glowPulse {
+     0% {
+         box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+     }
+
+     50% {
+         box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+     }
+
+     100% {
+         box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+     }
+ }
+
+ .why-box:hover {
+     transform: scale(.9);
+     box-shadow: 0px 0px 15px var(--primary);
+ }
+
+ #wcu .theme-btn-2 {
+     width: max-content;
+ }
+
+ #wcu .theme-btn-2:hover {
+     background-color: var(--accent);
+ }
+
+ /* gallery */
+ .gallery-row {
+     border-top: 10px solid var(--primary);
+ }
+
+ #gallery-carousel .carousel-inner {
+     transform: translateY(-10%);
+ }
+
+ .gallery-box {
+     scale: .8;
+ }
+
+ /* call to action */
+ #cta {
+     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--primary)), url(../images/banner/2.jpg);
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+ }
+
+ .cta-box {
+     background-color: var(--white);
+     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+     transition: .5s;
+     transform: translateY(0px);
+ }
+
+ .cta-box i {
+     color: var(--primary);
+     font-size: 50px;
+ }
+
+ .cta-box a {
+     color: var(--secondary);
+     transition: .5s;
+ }
+
+ .cta-box a:hover {
+     color: var(--accent);
+ }
+
+
+ .cta-box:hover {
+     transform: translateY(-10px);
+ }
+
+ /* footer */
+ footer {
+     background-color: var(--hover);
+     border-radius: 0px 0px 50px 50px;
+ }
+
+ .fot-logo {
+     background-color: var(--white);
+ }
+
+ .fot-content {
+     color: var(--white);
+ }
+
+ .fot-social-icon a {
+     background-color: var(--white);
+     width: 50px;
+     aspect-ratio: 1/1;
+     color: var(--primary);
+     border-radius: 50%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     transition: .5s;
+ }
+
+ .fot-social-icon a:hover {
+     background-color: var(--accent);
+     color: var(--white);
+ }
+
+ .fot-links a {
+     color: var(--white);
+     transition: .5s;
+ }
+
+ .fot-links a:hover {
+     color: var(--accent);
+ }
+
+ .other-website {
+     color: var(--white);
+ }
+
+ .other-website a {
+     color: var(--white);
+     transition: .5s;
+ }
+
+ .other-website a:hover {
+     color: var(--accent);
+ }
+
+
+ .copy-box {
+     position: relative;
+     background-color: #111111;
+ }
+
+ .copy-box .line {
+     position: absolute;
+     background-color: aqua;
+     box-shadow: 0px 0px 12px aqua;
+     width: 4px;
+     height: 100%;
+     top: 0px;
+     left: 0px;
+     border-radius: 50%;
+     overflow: hidden;
+ }
+
+ .copy-box.two .line {
+     border-radius: 0;
+     width: 2px;
+ }
+
+ .copy-box .line .scanner {
+     position: absolute;
+     top: 0;
+     left: 0;
+     background: white;
+     width: 100%;
+     height: 20px;
+     border-radius: 50%;
+     animation: scanner-loop 3s ease-in-out infinite;
+ }
+
+ .copy-box.two .line .scanner {
+     background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+     height: 50%;
+ }
+
+ @keyframes scanner-loop {
+     0% {
+         top: 0;
+     }
+
+     50% {
+         top: 100%;
+     }
+
+     100% {
+         top: 0;
+     }
+ }
+
+
+ /* gallery */
+.gallery-box {
+    position: relative;
+    transition: .5s;
+    scale: .9;
+}
+
+.gallery-box::after {
+    position: absolute;
+    font-family: "bootstrap-icons";
+    font-weight: 900;
+    font-size: 30px;
+    content: "\F150";
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.185);
+    z-index: 1;
+    scale: 0;
+    transition: .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.gallery-box:hover::after {
+    scale: 1;
+}
+.gallery-box:hover {
+    scale: 1;
+}
