@@ -101,37 +101,13 @@ populateSelect();
 // form box start
 
 function msgBox() {
-    document.querySelector("#tele-chatbox-unique").classList.toggle("active")
-}
-var captchaNumber;
-var canvas = document.getElementById("captchaCanvas");
-var ctx = canvas.getContext("2d");
-
-function createCaptcha() {
-    captchaNumber = Math.floor(1000 + Math.random() * 9000);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#ffffff"; // Set fill color to white
-    ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill the canvas with white
-    ctx.font = "30px cursive";
-    ctx.fillStyle = "rgb(223, 42, 23)" // Set text color to black
-    ctx.fillText(captchaNumber, 10, 30);
-
-    for (var i = 0; i < canvas.width; i++) {
-        for (var j = 0; j < canvas.height; j++) {
-            if (Math.random() > 0.6) { // Increase the noise probability
-                var data = ctx.getImageData(i, j, 1, 1).data;
-                var r = data[0];
-                var g = data[1];
-                var b = data[2];
-                var a = data[3];
-                var noise = Math.floor(Math.random() * 500) - 400;
-                ctx.fillStyle = "rgba(" + (r + noise) + "," + (g + noise) + "," + (b + noise) + "," + a + ")";
-                ctx.fillRect(i, j, 1, 1);
-            }
-        }
+    document.querySelector("#tele-chatbox-unique").classList.toggle("active");
+    const backdrop = document.querySelector(".modal-backdrop-custom");
+    if (backdrop) {
+        backdrop.classList.toggle("active");
     }
 }
-createCaptcha(); // Initial captcha creation
+// Initial captcha creation removed.
 
 // Call the sendUserDataToServer function when the page loads
 window.onload = function () {
@@ -141,15 +117,7 @@ window.onload = function () {
         document.querySelector("#tele-phone").value = localStorage.getItem("customer-number");
     }
 };
-// Validate captcha on form submit
-function validateCaptcha() {
-    var userInput = document.getElementById("captcha").value;
-    if (userInput != captchaNumber) {
-        alert("Captcha is incorrect!");
-        return false;
-    }
-    return true;
-}
+// CAPTCHA validation removed.
 function sendUserDataToServer() {
 
     var xhr = new XMLHttpRequest();
@@ -240,7 +208,7 @@ function limitLetters(textarea, maxLetters) {
 
 document.querySelector('#sendBtn').addEventListener('click', function (e) {
     e.preventDefault();
-    if (validateCaptcha()) {
+    if (true) { // Replaced validateCaptcha() with true
 
         // var photoUrl = document.getElementById('photo_url').value;
         var photoUrl = 'https://placehold.co/600x400/white/black/png';
@@ -291,27 +259,34 @@ document.querySelector('#sendBtn').addEventListener('click', function (e) {
                 alert("Please enter a valid email address.");
             } else {
 
-                // telegram chat box start
-                fetch('https://www.playabacusindia.com/form/tele-creative-arts-india/tele-chatbox.php', {
+                // Backend Mailer call
+                fetch('php/contact.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: 'photo_url=' + encodeURIComponent(photoUrl) + '&message=' + encodeURIComponent(message),
+                    body: `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(frontPhone + phone)}&email=${encodeURIComponent(email)}&message=${encodeURIComponent(msg)}&inquiry_type=${encodeURIComponent(selectedValue)}&city=${encodeURIComponent(city)}&region=${encodeURIComponent(region)}`,
                 }).then(function (response) {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
-                    return response.json(); // Parse response as JSON
+                    return response.json();
                 }).then(function (data) {
                     console.log(data);
-                    // alert('Message sent successfully');
+                    if (data.status === "success") {
+                        showStatusNotification("Message sent successfully!", "success");
+                        // Reset form
+                        document.querySelector("#tele-name").value = "";
+                        document.querySelector("#tele-phone").value = "";
+                        document.querySelector("#tele-email").value = "";
+                        document.querySelector('#message').value = "";
+                    } else {
+                        showStatusNotification(data.message || 'Failed to send message', "error");
+                    }
                 }).catch(function (error) {
                     console.error('There was a problem with your fetch operation:', error);
-                    // alert('Failed to send message');
+                    showStatusNotification('Failed to send message. Please try again later.', "error");
                 });
-                // telegram chat box end
-
 
                 document.querySelector('#sendBtn').classList.add("active");
 
@@ -319,6 +294,25 @@ document.querySelector('#sendBtn').addEventListener('click', function (e) {
         }
     }
 });
+
+function showStatusNotification(message, type) {
+    const notification = document.getElementById('statusNotification');
+    const icon = document.getElementById('statusIcon');
+    const messageSpan = document.getElementById('statusMessage');
+
+    messageSpan.textContent = message;
+    notification.className = `top-notification active ${type}`;
+
+    if (type === 'success') {
+        icon.className = 'bi bi-check-circle-fill';
+    } else {
+        icon.className = 'bi bi-exclamation-triangle-fill';
+    }
+
+    setTimeout(() => {
+        notification.classList.remove('active');
+    }, 5000);
+}
 
 
 // form box end

@@ -1,0 +1,17 @@
+# Creative Arts India - Server Configuration
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Redirect HTTP to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Custom Error Pages
+ErrorDocument 404 /404.html
+
+# Security Headers (Optional but recommended)
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
