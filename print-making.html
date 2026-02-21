@@ -93,6 +93,12 @@
 </head>
 
 <body>
+    <!-- Top Notification for Success/Error -->
+    <div id="statusNotification" class="top-notification">
+        <i id="statusIcon" class="bi"></i>
+        <span id="statusMessage"></span>
+    </div>
+
     <header id="mainHeader">
         <!-- Main Nav -->
         <nav class="navbar navbar-expand-lg">
@@ -108,19 +114,22 @@
                         <h5 class="offcanvas-title">Menu</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                     </div>
-                    <div class="offcanvas-body d-flex flex-column flex-md-column flex-lg-row justify-content-start align-items-start justify-content-md-start align-items-md-start justify-content-lg-center align-items-lg-center gap-5">
+                    <div
+                        class="offcanvas-body d-flex flex-column flex-md-column flex-lg-row justify-content-start align-items-start justify-content-md-start align-items-md-start justify-content-lg-center align-items-lg-center gap-5">
                         <ul class="navbar-nav ms-0 ms-md-0 ms-lg-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="programs.html" id="dropdownMenuLink" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="programs.html" id="dropdownMenuLink"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Programs
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="preschool.html">Preschool (3-7 years)</a></li>
-                                    <li><a class="dropdown-item" href="middle-school.html">Middle School (8- 12 years)</a></li>
-                                    <li><a class="dropdown-item" href="high-school.html">High School (13-18 years)</a></li>
+                                    <li><a class="dropdown-item" href="middle-school.html">Middle School (8- 12
+                                            years)</a></li>
+                                    <li><a class="dropdown-item" href="high-school.html">High School (13-18 years)</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
@@ -142,8 +151,8 @@
                                 <a href="https://www.youtube.com/channel/UCot9VJkz3JArME500R00FVQ" target="_blank"><i
                                         class="bi bi-youtube"></i></a>
                                 <a href="https://x.com/PlayAbacus" target="_blank"><i class="bi bi-twitter-x"></i></a>
-                                <a href="https://www.linkedin.com/company/ideal-play-abacus-india-pvt-ltd" target="_blank"><i
-                                        class="bi bi-linkedin"></i></a>
+                                <a href="https://www.linkedin.com/company/ideal-play-abacus-india-pvt-ltd"
+                                    target="_blank"><i class="bi bi-linkedin"></i></a>
                             </div>
                             <div class="d-flex justify-content-center align-items-start flex-column w-100 gap-3 mt-5">
                                 <a href="tel:919940416989"><i class="bi bi-telephone"></i> +91 99404 16989</a>
@@ -163,7 +172,8 @@
                     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="images/banner/print-making.jpg" class="d-block w-100 banner-img" alt="Print Making">
+                                <img src="images/banner/print-making.jpg" class="d-block w-100 banner-img"
+                                    alt="Print Making">
                             </div>
                         </div>
                     </div>
@@ -232,14 +242,19 @@
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex justify-content-center align-items-center w-100 flex-wrap key-words-box gap-3">
-                        <div onclick="msgBox()" class="theme-btn"><a href="#print-making-for-kids" class="btn-txt">print making for
+                        <div onclick="msgBox()" class="theme-btn"><a href="#print-making-for-kids" class="btn-txt">print
+                                making for
                                 kids</a></div>
-                        <div onclick="msgBox()" class="theme-btn"><a href="#kids-stamping-art" class="btn-txt">kids stamping art</a></div>
-                        <div onclick="msgBox()" class="theme-btn"><a href="#creative-print-techniques" class="btn-txt">creative print
+                        <div onclick="msgBox()" class="theme-btn"><a href="#kids-stamping-art" class="btn-txt">kids
+                                stamping art</a></div>
+                        <div onclick="msgBox()" class="theme-btn"><a href="#creative-print-techniques"
+                                class="btn-txt">creative print
                                 techniques</a></div>
-                        <div onclick="msgBox()" class="theme-btn"><a href="#block-printing-for-children" class="btn-txt">block printing for
+                        <div onclick="msgBox()" class="theme-btn"><a href="#block-printing-for-children"
+                                class="btn-txt">block printing for
                                 children</a></div>
-                        <div onclick="msgBox()" class="theme-btn"><a href="#art-with-texture" class="btn-txt">art with texture</a></div>
+                        <div onclick="msgBox()" class="theme-btn"><a href="#art-with-texture" class="btn-txt">art with
+                                texture</a></div>
                     </div>
                 </div>
             </div>
@@ -456,7 +471,7 @@
         </a>
     </div>
     <!-- form -->
-     <div id="tele-chatbox-unique">
+    <div id="tele-chatbox-unique">
         <div class="tele-chatbox-header ">
             <img style="border-radius: 10px;" class="h-50" src="images/logo.png" alt="IPA">
             <div onclick="msgBox()" id="tele-close"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"

@@ -281,19 +281,19 @@
                             </div>
 
                             <!-- Inquiry Type -->
-                            <div class="form-field">
-                                <label>Inquiry For</label>
-                                <div class="d-flex flex-wrap gap-3">
+                            <div class="form-field mb-4">
+                                <label class="mb-3">Inquiry For</label>
+                                <div class="d-flex flex-wrap gap-4">
                                     <label class="text-black d-flex align-items-center gap-2"
-                                        style="font-size: 0.9rem; cursor: pointer;">
+                                        style="font-size: 0.95rem; cursor: pointer;">
                                         <input type="radio" name="inquiry_type" value="Student Inquiry" checked> Student
                                     </label>
                                     <label class="text-black d-flex align-items-center gap-2"
-                                        style="font-size: 0.9rem; cursor: pointer;">
+                                        style="font-size: 0.95rem; cursor: pointer;">
                                         <input type="radio" name="inquiry_type" value="Franchise Inquiry"> Franchise
                                     </label>
                                     <label class="text-black d-flex align-items-center gap-2"
-                                        style="font-size: 0.9rem; cursor: pointer;">
+                                        style="font-size: 0.95rem; cursor: pointer;">
                                         <input type="radio" name="inquiry_type" value="Others"> Others
                                     </label>
                                 </div>
@@ -469,6 +469,88 @@
                         <p class="m-0">© 2025 - Ideal Play Abacus India. All rights reserved.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Contact Modal Backdrop -->
+    <div class="modal-backdrop-custom" onclick="msgBox()"></div>
+
+    <!-- Premium Global Contact Modal -->
+    <div id="tele-chatbox-unique">
+        <div class="premium-modal-header">
+            <img class="modal-logo" src="images/logo.png" alt="Creative Arts India">
+            <div onclick="msgBox()" id="tele-close">
+                <i class="bi bi-x-lg"></i>
+            </div>
+        </div>
+        <div class="premium-modal-body">
+            <div class="premium-contact-form p-0 shadow-none border-0">
+                <h3 class="mb-4 txt-primary" style="font-family: 'Playfair Display', serif; font-size: 1.5rem;">Ready to
+                    Start?</h3>
+
+                <!-- Name -->
+                <div class="form-field">
+                    <label for="tele-name">Full Name</label>
+                    <input id="tele-name" class="form-input" placeholder="Enter your full name" required type="text">
+                </div>
+
+                <!-- Email -->
+                <div class="form-field">
+                    <label for="tele-email">Email Address</label>
+                    <input id="tele-email" class="form-input" placeholder="Enter your email" required type="email">
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-field">
+                    <label for="tele-phone">Phone Number</label>
+                    <div class="d-flex align-items-center gap-2">
+                        <div id="country-select" class="country-picker">
+                            <label for="searchInput" onclick="toggleCon()" class="val" data-value="+91">
+                                <img src="https://flagcdn.com/w320/in.png" alt="IN"> +91
+                            </label>
+                            <div class="dropdown">
+                                <div class="items"></div>
+                                <input type="text" id="searchInput" placeholder="Search...">
+                            </div>
+                        </div>
+                        <input id="tele-phone" class="form-input" placeholder="Your Number" required type="text">
+                    </div>
+                </div>
+
+                <!-- Inquiry Type -->
+                <div class="form-field mb-4">
+                    <label class="mb-3">Inquiry For</label>
+                    <div class="d-flex flex-wrap gap-4">
+                        <label class="text-black d-flex align-items-center gap-2"
+                            style="font-size: 0.95rem; cursor: pointer;">
+                            <input type="radio" name="inquiry_type" value="Student Inquiry" checked> Student
+                        </label>
+                        <label class="text-black d-flex align-items-center gap-2"
+                            style="font-size: 0.95rem; cursor: pointer;">
+                            <input type="radio" name="inquiry_type" value="Franchise Inquiry"> Franchise
+                        </label>
+                        <label class="text-black d-flex align-items-center gap-2"
+                            style="font-size: 0.95rem; cursor: pointer;">
+                            <input type="radio" name="inquiry_type" value="Others"> Others
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Message -->
+                <div class="form-field">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" class="form-input form-textarea"
+                        placeholder="How can we help you?" required oninput="limitLetters(this, 150)"
+                        style="min-height: 100px;"></textarea>
+                    <div id="wordCountMsg" style="color: #888; font-size: 12px; margin-top: 6px; text-align: right;">0 /
+                        150 letters</div>
+                </div>
+
+                <!-- Send Button -->
+                <button id="sendBtn" class="submit-btn-premium" style="padding: 0.9rem;">
+                    <span>Send Message</span>
+                </button>
             </div>
         </div>
     </div>

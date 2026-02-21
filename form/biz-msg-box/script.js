@@ -191,122 +191,122 @@ function saveCustomerDataLocally(customerName, customerNumber) {
 }
 
 function limitLetters(textarea, maxLetters) {
+    if (!textarea) return;
     const currentText = textarea.value;
 
     if (currentText.length > maxLetters) {
         textarea.value = currentText.substring(0, maxLetters);
-        alert("You can only enter up to " + maxLetters + " characters.");
+        showStatusNotification("You can only enter up to " + maxLetters + " characters.", "error");
     }
 
-    // Safely update character count
-    const counter = document.getElementById("wordCountMsg");
+    // Find the counter relative to the textarea's container or globally
+    let counter = textarea.parentElement.querySelector("#wordCountMsg") || document.getElementById("wordCountMsg");
     if (counter) {
         counter.textContent = `${textarea.value.length} / ${maxLetters} letters`;
     }
 }
 
+// Global listener for all potential send buttons
+document.addEventListener('click', function (e) {
+    const sendBtn = e.target.closest('#sendBtn, .submit-btn-premium');
+    if (!sendBtn) return;
 
-document.querySelector('#sendBtn').addEventListener('click', function (e) {
     e.preventDefault();
-    if (true) { // Replaced validateCaptcha() with true
 
-        // var photoUrl = document.getElementById('photo_url').value;
-        var photoUrl = 'https://placehold.co/600x400/white/black/png';
-        let selectedValue = document.querySelector('input[name="inquiry_type"]:checked')?.value;
-        console.log(selectedValue);
-        let name = document.querySelector("#tele-name").value.trim();
-        let frontPhoneElement = document.querySelector(".val");
-        let frontPhone = frontPhoneElement.dataset.value.trim();
-        let phone = document.querySelector("#tele-phone").value.trim();
-        let email = document.querySelector("#tele-email").value.trim();
-        let msg = document.querySelector('#message').value.trim();
-        let ipAddress = localStorage.getItem("ipAddress");
-        let host = localStorage.getItem("host");
-        let screenResolution = localStorage.getItem("screenResolution");
-        let city = localStorage.getItem("city");
-        let region = localStorage.getItem("region");
-        let message = `Hi,
+    // Find the closest form container to differentiate between modal and page form
+    const formContainer = sendBtn.closest('.premium-contact-form');
+    if (!formContainer) return;
 
-    We hope this message finds you well. You've got a new inquiry from:
+    // Get values relative to this specific form
+    let nameInput = formContainer.querySelector("#tele-name");
+    let phoneInput = formContainer.querySelector("#tele-phone");
+    let emailInput = formContainer.querySelector("#tele-email");
+    let msgInput = formContainer.querySelector('#message');
+    let inquiryInput = formContainer.querySelector('input[name="inquiry_type"]:checked');
 
-    From,
-    Name: ${name}
-    Phone: ${frontPhone}${phone}
+    let name = nameInput ? nameInput.value.trim() : "";
+    let phone = phoneInput ? phoneInput.value.trim() : "";
+    let email = emailInput ? emailInput.value.trim() : "";
+    let msg = msgInput ? msgInput.value.trim() : "";
+    let selectedValue = inquiryInput ? inquiryInput.value : undefined;
 
-    Message :-
-    ${msg}
-    type: ${selectedValue}
-    More Details:
-    City: ${city}
-    Region: ${region}
-    IP Address: ${ipAddress}
-    From URL: ${host}
-    Screen Resolution: ${screenResolution}
+    let frontPhoneElement = formContainer.querySelector(".val") || document.querySelector(".val");
+    let frontPhone = frontPhoneElement ? frontPhoneElement.dataset.value.trim() : "+91";
 
-    Please reach out to them at your earliest convenience.
+    let ipAddress = localStorage.getItem("ipAddress") || "unknown";
+    let host = localStorage.getItem("host") || window.location.href;
+    let screenResolution = localStorage.getItem("screenResolution") || "unknown";
+    let city = localStorage.getItem("city") || "unknown";
+    let region = localStorage.getItem("region") || "unknown";
 
-    Best,
-    Team Biz15`;
-
-
-        if (name === "" || phone === "" || msg === "" || email === "" || selectedValue === undefined) {
-            alert("Please fill in all fields and select an inquiry type.");
-        } else if (!/^\d{10,}$/.test(phone)) {
-            alert("Please enter a valid number.");
+    if (name === "" || phone === "" || msg === "" || email === "" || selectedValue === undefined) {
+        showStatusNotification("Please fill in all fields and select an inquiry type.", "error");
+    } else if (!/^\d{10,}$/.test(phone)) {
+        showStatusNotification("Please enter a valid number.", "error");
+    } else {
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            showStatusNotification("Please enter a valid email address.", "error");
         } else {
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (!emailPattern.test(email)) {
-                alert("Please enter a valid email address.");
-            } else {
+            sendBtn.classList.add("active");
+            sendBtn.disabled = true;
 
-                // Backend Mailer call
-                fetch('php/contact.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(frontPhone + phone)}&email=${encodeURIComponent(email)}&message=${encodeURIComponent(msg)}&inquiry_type=${encodeURIComponent(selectedValue)}&city=${encodeURIComponent(city)}&region=${encodeURIComponent(region)}`,
-                }).then(function (response) {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                }).then(function (data) {
-                    console.log(data);
-                    if (data.status === "success") {
-                        showStatusNotification("Message sent successfully!", "success");
-                        // Reset form
-                        document.querySelector("#tele-name").value = "";
-                        document.querySelector("#tele-phone").value = "";
-                        document.querySelector("#tele-email").value = "";
-                        document.querySelector('#message').value = "";
-                    } else {
-                        showStatusNotification(data.message || 'Failed to send message', "error");
-                    }
-                }).catch(function (error) {
-                    console.error('There was a problem with your fetch operation:', error);
-                    showStatusNotification('Failed to send message. Please try again later.', "error");
-                });
-
-                document.querySelector('#sendBtn').classList.add("active");
-
-            }
+            // Backend Mailer call
+            fetch('php/contact.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(frontPhone + phone)}&email=${encodeURIComponent(email)}&message=${encodeURIComponent(msg)}&inquiry_type=${encodeURIComponent(selectedValue)}&city=${encodeURIComponent(city)}&region=${encodeURIComponent(region)}`,
+            }).then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            }).then(function (data) {
+                if (data.status === "success") {
+                    showStatusNotification("Message sent successfully!", "success");
+                    // Reset fields in THIS form
+                    if (nameInput) nameInput.value = "";
+                    if (phoneInput) phoneInput.value = "";
+                    if (emailInput) emailInput.value = "";
+                    if (msgInput) msgInput.value = "";
+                    let counter = formContainer.querySelector("#wordCountMsg");
+                    if (counter) counter.textContent = "0 / 150 letters";
+                } else {
+                    showStatusNotification(data.message || 'Failed to send message', "error");
+                }
+            }).catch(function (error) {
+                console.error('There was a problem with your fetch operation:', error);
+                showStatusNotification('Failed to send message. Please try again later.', "error");
+            }).finally(function () {
+                sendBtn.classList.remove("active");
+                sendBtn.disabled = false;
+            });
         }
     }
 });
 
 function showStatusNotification(message, type) {
     const notification = document.getElementById('statusNotification');
-    const icon = document.getElementById('statusIcon');
-    const messageSpan = document.getElementById('statusMessage');
+    if (!notification) {
+        // Fallback to alert if notification element is missing
+        alert(message);
+        return;
+    }
 
-    messageSpan.textContent = message;
+    const icon = notification.querySelector('#statusIcon');
+    const messageSpan = notification.querySelector('#statusMessage');
+
+    if (messageSpan) messageSpan.textContent = message;
     notification.className = `top-notification active ${type}`;
 
-    if (type === 'success') {
-        icon.className = 'bi bi-check-circle-fill';
-    } else {
-        icon.className = 'bi bi-exclamation-triangle-fill';
+    if (icon) {
+        if (type === 'success') {
+            icon.className = 'bi bi-check-circle-fill';
+        } else {
+            icon.className = 'bi bi-exclamation-triangle-fill';
+        }
     }
 
     setTimeout(() => {

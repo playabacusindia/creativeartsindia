@@ -93,6 +93,12 @@
 </head>
 
 <body>
+    <!-- Top Notification for Success/Error -->
+    <div id="statusNotification" class="top-notification">
+        <i id="statusIcon" class="bi"></i>
+        <span id="statusMessage"></span>
+    </div>
+
     <header id="mainHeader">
         <!-- Main Nav -->
         <nav class="navbar navbar-expand-lg">
@@ -628,19 +634,19 @@
                 </div>
 
                 <!-- Inquiry Type -->
-                <div class="form-field">
-                    <label>Inquiry For</label>
-                    <div class="d-flex flex-wrap gap-3">
+                <div class="form-field mb-4">
+                    <label class="mb-3">Inquiry For</label>
+                    <div class="d-flex flex-wrap gap-4">
                         <label class="text-black d-flex align-items-center gap-2"
-                            style="font-size: 0.85rem; cursor: pointer;">
+                            style="font-size: 0.95rem; cursor: pointer;">
                             <input type="radio" name="inquiry_type" value="Student Inquiry" checked> Student
                         </label>
                         <label class="text-black d-flex align-items-center gap-2"
-                            style="font-size: 0.85rem; cursor: pointer;">
+                            style="font-size: 0.95rem; cursor: pointer;">
                             <input type="radio" name="inquiry_type" value="Franchise Inquiry"> Franchise
                         </label>
                         <label class="text-black d-flex align-items-center gap-2"
-                            style="font-size: 0.85rem; cursor: pointer;">
+                            style="font-size: 0.95rem; cursor: pointer;">
                             <input type="radio" name="inquiry_type" value="Others"> Others
                         </label>
                     </div>
